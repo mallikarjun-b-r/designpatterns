@@ -1,2 +1,2 @@
 # designpatterns
-Design Pattern Summary
+Design Patterns Summary
