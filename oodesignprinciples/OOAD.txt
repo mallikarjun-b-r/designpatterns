@@ -1,0 +1,41 @@
+Great Software
+    well-designed/coded, easy to maintain. reuse, extend
+
+
+Steps to make 1
+        Make sure it does what its supposed to do
+        Apply basic OO principles to add flexibility
+        Strive for maintainable and reusable design
+
+OOAD
+    make sure project works/ keeps-working/ upgradable makes customer happy
+    make sure its reusable/flexible makes dev happy
+
+    Concepts
+        Encapsulate -> break object into small chunks
+        Delegate behaviour to encapsulated objects
+        Code to interfaces rather than implementations
+        Each class should have only one reason to change
+        Classes are about behaviour and functionality
+
+        Encapsulate what varies
+
+        You can write code that looks like this:
+
+        if (pet.type() == dog) {
+          pet.bark();
+        } else if (pet.type() == cat) {
+          pet.meow();
+        } else if (pet.type() == duck) {
+          pet.quack()
+        }
+        or you can write code that looks like this:
+
+        pet.speak();
+
+Prefer composition to inheritance
+
+Example
+    if PaymentService new property is to be added for guitarspec lets say noOfStrings Guitar, GuitarSpec and Inventory will have to make code changes
+        hence since the behaviour of each instrument is not changing we can have an Instrument Class With InstrumentType as enum and have
+        Map to store properties

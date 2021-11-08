@@ -1,0 +1,212 @@
+Law of demeter -> Principle of the least knowledge talk to only immediate members a.b ok a.b.c not ok
+
+Strategy
+ Is PaymentService way of isolating the changes to set of algorithms independent w.r.t clients using the algorithms, so that client can change independently
+ irrespective of algorithms so that algorithms can be interchangeable as far as the client is concerned
+
+ JAVA API examples
+    java.util.Comparator#compare(), executed by among others Collections#sort().
+
+Observer Pattern
+    implementing one-to-may dependency b/w objects so that when one changes all of its dependents are notified
+    Pub-Sub(Coupled)
+        interface Observable
+            addObserver()
+            removeObserver()
+            notify()
+
+        interface Observer
+            update(UpdatedData updatedData)
+
+    Pub-Sub(De-Coupled)
+        interface Observable
+            getBroker()
+
+        interface Broker
+             addObserver()
+             removeObserver()
+             notify()
+
+        interface Observer
+            update(UpdatedData updatedData)
+
+    JAVA API examples
+        All implementations of java.util.EventListener
+        java.util.Observer/java.util.Observable
+
+
+Decorator Pattern
+    attached additional responsibilities to an object dynamically
+
+    interface Component
+        methodA()
+    class Component1 implements Component
+        methodA()
+
+    interface Decorator extends Component
+
+    class Decorator1 implements Decorator
+        Component wrappedObject
+        methodA()
+
+    JAVA API examples
+        All subclasses of java.io.InputStream, OutputStream, Reader and Writer have a constructor taking an instance of same type.
+        java.util.Collections, the checkedXXX(), synchronizedXXX() and unmodifiableXXX() methods.
+
+Factory
+    defines an interface for creating an obj, but lets the implementation of the interface decide on which class to instantiate
+
+    JAVA API examples
+        java.util.Calendar#getInstance()
+        java.util.ResourceBundle#getBundle()
+        java.text.NumberFormat#getInstance()
+        java.nio.charset.Charset#forName()
+
+Abstract Factory
+    defines an interface for creating factories, but lets the implementation of the interface decide on which factory to instantiate
+     which in-turn decide which obj to instantiate
+
+    JAVA API examples
+    javax.xml.parsers.DocumentBuilderFactory#newInstance()
+    javax.xml.transform.TransformerFactory#newInstance()
+    javax.xml.xpath.XPathFactory#newInstance()
+
+Singleton Pattern
+    have a single instance of the object across the application and make impossible to create another instance
+
+    bad in a way as we are sharing a global context, also for test we might need to mock which is not possible with singleton
+
+    JAVA API examples
+
+    java.lang.Runtime#getRuntime()
+    java.awt.Desktop#getDesktop()
+    java.lang.System#getSecurityManager()
+
+Command Pattern
+   encapsulated a req(command) as an obj there by letting u parametrize other obj with diff requests queue, log, support undoable operations
+
+   class Invoker
+    List<Command> commands;
+
+   interface Command
+    execute()
+    unExecute()
+
+   command acts on Receiver on calling execute or unExecute
+
+   class Receiver can be any receiver
+    action1() -> can be anyMethod
+    action2() -> can be anyMethod
+    ...
+
+
+   class LightOnCommand implements Command
+    Light light -> (one of the Receiver)
+    execute(){
+        light.on();
+    }
+    unExecute(){
+        light.off();
+    }
+
+   class LightOffCommand implements Command
+    Light light -> (one of the Receiver)
+    execute(){
+        light.on();
+    }
+    unExecute(){
+        light.off();
+    }
+
+    JAVA API Examples
+
+    All implementations of java.lang.Runnable
+    All implementations of javax.swing.Action
+
+
+Adapter Pattern
+    making incompatible stuff compatible by adding another layer
+
+    class Client
+        ITarget
+    interface ITarget
+        makeRequest()
+    class Adapter implements ITarget
+        Adaptee adaptee
+        makeRequest(){
+        adaptee.makeCustomRequest()
+        }
+    Adaptee
+        makeCustomRequest()
+
+    JAVA API Examples
+
+    java.util.Arrays#asList()
+    java.util.Collections#list()
+    java.io.InputStreamReader(InputStream) (returns a Reader)
+    java.io.OutputStreamWriter(OutputStream) (returns a Writer)
+
+Facade Pattern
+    a facade is an object that serves as a front-facing interface masking more complex underlying or structural code.
+
+    Java API Examples
+    javax.faces.context.FacesContext,
+    javax.faces.context.ExternalContext
+
+Proxy Pattern
+    Proxy is a structural design pattern that lets you provide a substitute or placeholder for another object
+    Remote, Virtual, Protection similar to decorator
+
+    Example
+    interface Parser
+        parse(String data)
+        getMetadata()
+
+    class BookParser impl Parser
+        parse(String data){}
+        getMetadata(){}
+
+    class LazyBookProxyParser impl Parser
+        BookParser bookParser
+        String data
+        parse(String data){
+            this.data=data;
+        }
+        getMetadata(){
+            if(bookParser == null){
+                bookParser = new BookParser(data);
+            }
+            return bookParser.getMetadata();
+        }
+
+    JAVA API Example
+    java.lang.reflect.Proxy
+    java.rmi.*
+    javax.ejb.EJB
+    javax.inject.Inject
+    javax.persistence.PersistenceContext
+
+Bridge Pattern
+    The bridge pattern is a design pattern used in software engineering that is meant to
+     "decouple an abstraction from its implementation so that the two can vary independently"
+
+    JAVA API Example
+
+    LinkedHashMap(LinkedHashSet<K>, List<V>) which returns an unmodifiable linked map
+    which doesn't clone the items, but uses them.
+    The java.util.Collections#newSetFromMap() and singletonXXX() methods however comes close
+
+https://www.youtube.com/watch?v=4F72VULWFvc
+https://www.youtube.com/watch?v=wEhu57pih5w
+https://www.youtube.com/watch?v=RlfLCWKxHJ0
+https://www.youtube.com/watch?v=-FRm3VPhseI
+https://www.youtube.com/watch?v=XcT4yYu_TTs
+
+
+
+
+
+
+
+
+
